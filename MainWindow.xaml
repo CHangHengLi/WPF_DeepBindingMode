@@ -1,0 +1,86 @@
+﻿<Window x:Class="BindingModeDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BindingModeDemo"
+        xmlns:common="clr-namespace:BindingModeDemo.Common"
+        xmlns:viewModels="clr-namespace:BindingModeDemo.ViewModels"
+        xmlns:views="clr-namespace:BindingModeDemo.Views"
+        mc:Ignorable="d"
+        Title="{Binding Title}"
+        Height="650" Width="900"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <common:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        
+        <DataTemplate DataType="{x:Type viewModels:OneWayViewModel}">
+            <views:OneWayView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModels:TwoWayViewModel}">
+            <views:TwoWayView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModels:OneWayToSourceViewModel}">
+            <views:OneWayToSourceView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModels:DefaultBindingViewModel}">
+            <views:DefaultBindingView />
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <!-- 顶部导航菜单 -->
+        <Border Grid.Row="0" Background="#3c98db" Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Text="WPF绑定模式深入示例" 
+                           Grid.Column="0"
+                           Foreground="White" 
+                           FontSize="18" 
+                           FontWeight="Bold" 
+                           VerticalAlignment="Center"
+                           Margin="0,0,40,0"/>
+                
+                <StackPanel Grid.Column="1" 
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Left">
+                    <Button Content="OneWay" 
+                            Command="{Binding NavigateToOneWayCommand}" 
+                            Padding="15,8" 
+                            Margin="0,0,10,0"/>
+                    
+                    <Button Content="TwoWay" 
+                            Command="{Binding NavigateToTwoWayCommand}" 
+                            Padding="15,8" 
+                            Margin="0,0,10,0"/>
+                            
+                    <Button Content="OneWayToSource" 
+                            Command="{Binding NavigateToOneWayToSourceCommand}" 
+                            Padding="15,8" 
+                            Margin="0,0,10,0"/>
+                            
+                    <Button Content="Default" 
+                            Command="{Binding NavigateToDefaultCommand}" 
+                            Padding="15,8" 
+                            Margin="0,0,10,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <!-- 内容区域 -->
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+    </Grid>
+</Window>
