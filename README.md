@@ -1,6 +1,7 @@
 # WPF绑定模式深入示例
 
 本项目演示了WPF中不同的数据绑定模式，包括OneWay、TwoWay、OneWayToSource和Default四种模式，帮助开发者深入理解WPF的数据绑定机制。
+![image](https://github.com/user-attachments/assets/6fe35b2c-c23a-47c9-890a-7fe714527c7a)
 
 ## 功能说明
 
